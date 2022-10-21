@@ -4,10 +4,12 @@ import io.restassured.http.ContentType;
 import org.RestAssured_Tutorials.BookDetails;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
@@ -20,6 +22,7 @@ public class PostMethod {
     2. using json object
     3. using json file
     4. using POJO class -- concept of serialization-deserialization  is used in here
+    5. using dataprovider
     */
 
     /* this test will post name,job
@@ -101,4 +104,28 @@ public class PostMethod {
 
     }
 
+    @DataProvider(name="testdata")
+    public String[][] UserData()
+    {
+        return new String[][]
+                {
+                        {"Ervin Howell","Antonette","Shanna@melissa.tv"},
+                        {"Adam Hitchok","Hitchok","Hitchok@melissa.tv"},
+                        {"Madison Lee","Hitchok","Madison@melissa.tv"},
+                };
+    }
+
+    @Test(dataProvider = "testdata")
+    public void PostviaDataTable(String name,String username,String email)
+    {
+        JSONObject object = new JSONObject();
+        object.put("name",name);
+        object.put("username",username);
+        object.put("email",email);
+
+        given().contentType("application/json")
+                .body(object)
+                .when().post("https://jsonplaceholder.typicode.com/users")
+                .then().statusCode(201).log().all();
+    }
 }
