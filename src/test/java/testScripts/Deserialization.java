@@ -7,6 +7,12 @@ import static io.restassured.RestAssured.given;
 
 public class Deserialization {
 
+    /*
+        In below test we are going to see how we can perform deSerialization,
+        we have created a POJO class named UserDetails and we will store the response
+        using the object of UserDetails class.
+        lastly we will print the details.
+     */
     @Test
     public void deSerialization()
     {
