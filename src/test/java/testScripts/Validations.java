@@ -86,7 +86,8 @@ public class Validations {
     @Test
     public void ValidateXMLPath()
     {
-        given().when().get("http://www.thomas-bayer.com/sqlrest/CUSTOMER/1/").then().body("FIRSTNAME",equalTo("1SusanneKing366 - 20th Ave.Olten"));
+        given().when().get("http://www.thomas-bayer.com/sqlrest/CUSTOMER/1/").then()
+                .body("CUSTOMER.FIRSTNAME",equalTo("Susanne"));
 
     }
 }

@@ -19,7 +19,7 @@ public class BlackListHeader {
     {
         List headers = new ArrayList<String>();
         headers.add("Server");
-        headers.add("User-Agent");
+        headers.add("report-to");
         headers.add("Etag");
 
             given().config(RestAssured.config().logConfig(LogConfig.logConfig().blacklistHeaders(headers)))

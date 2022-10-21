@@ -63,7 +63,7 @@ public class E2EFlow {
     }
 
 
-    @Test
+    @Test(dependsOnMethods = {"RegisterUser"})
     public void UserLogin()
     {
         JSONObject request = new JSONObject();
@@ -83,7 +83,7 @@ public class E2EFlow {
       In below test we will set Token as Authorization header &
       then we will validate for userid 11133,11134,11135,11136
      */
-    @Test
+    @Test(dependsOnMethods = {"UserLogin"})
     public void Get_AllUsers() throws IOException
     {
         JSONObject request = new JSONObject();
@@ -107,7 +107,7 @@ public class E2EFlow {
 
     }
 
-    @Test
+    @Test(dependsOnMethods = {"UserLogin"})
     public void CreateUser()
     {
         JSONObject request = new JSONObject();
@@ -132,7 +132,7 @@ public class E2EFlow {
 
     }
 
-    @Test
+    @Test(dependsOnMethods = {"UserLogin"})
     public void GetuserbyId()
     {
         JSONObject request = new JSONObject();
@@ -157,7 +157,7 @@ public class E2EFlow {
         hence no token is required,**Note: please change the employee id when you
         wanna test as it will give error if you use same :)
      */
-    @Test
+    @Test(dependsOnMethods = {"UserLogin"})
     public void UpdateUser()
     {
         JSONObject request = new JSONObject();
@@ -176,7 +176,7 @@ public class E2EFlow {
     }
 
 
-    @Test
+    @Test(dependsOnMethods = {"UserLogin"})
     public void DeleteUser()
     {
         given()
