@@ -5,6 +5,10 @@ I have also covered some other testscripts like setting parameters,logging and h
 Also I have tried to cover an end to end flow for and API Testing.\
 Since this is not a framework hence no implementation for reporting is done.\
 But we can still integrate Extent Report with rest assured and build an API Testing Framework.\
+In Repo you will learn how to make GET call, POST using map,POJO class,JSON Object,Json file, PUT/PATCH/DELETE request.\
+How to set query,path parameter and how to log header,body, cookies.\
+How to blacklist header being print on console.\
+How to upload and download file using api call.
 
 ## Features
 - Rest assured is java library for testing Restful Web services. It can be used to test XML & JSON based web services. 
