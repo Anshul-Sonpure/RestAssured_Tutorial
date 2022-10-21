@@ -22,6 +22,7 @@ public class GETMethod {
     @Test
     public void PrintResponse()
     {
+
         given().get("https://reqres.in/api/users/2").then().log().all();
     }
 

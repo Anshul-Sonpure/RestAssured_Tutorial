@@ -19,7 +19,7 @@ public class PostMethod {
     1. using map
     2. using json object
     3. using json file
-    4. using POJO class
+    4. using POJO class -- concept of serialization-deserialization  is used in here
     */
 
     /* this test will post name,job
@@ -83,7 +83,7 @@ public class PostMethod {
     }
 
     /*
-    below test make use of BookDetails POJO class and will use the setter method to set the data
+    below test make use of BookDetails POJO class "src\main\java\org\RestAssured_Tutorials" and will use the setter method to set the data
     and make a POST Call to the end point and will validate StatusCode
      */
     @Test

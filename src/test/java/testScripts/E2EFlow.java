@@ -43,9 +43,9 @@ public class E2EFlow {
     @Test
     public void RegisterUser() throws IOException {
         JSONObject request = new JSONObject();
-        request.put("name","Demouser122");
-        request.put("email","Demouser122@gmail.com");
-        request.put("password","Demo_user@122");
+        request.put("name","Demouser131");
+        request.put("email","Demouser131@gmail.com");
+        request.put("password","Demo_user@131");
         Response response =
                 given()
                         .contentType("application/json")
@@ -67,8 +67,8 @@ public class E2EFlow {
     public void UserLogin()
     {
         JSONObject request = new JSONObject();
-        request.put("email","Demouser105@gmail.com");
-        request.put("password","Demo_user@105");
+        request.put("email","Demouser131@gmail.com");
+        request.put("password","Demo_user@131");
                 String logintoken = given()
                         .contentType("application/json")
                         .body(request)
