@@ -4,7 +4,7 @@ public class BookDetails {
 
     String title;
     String body;
-
+    int id;
     public String getTitle() {
         return title;
     }
@@ -29,6 +29,6 @@ public class BookDetails {
         this.id = id;
     }
 
-    int id;
+
 
 }
