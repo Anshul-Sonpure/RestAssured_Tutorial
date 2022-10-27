@@ -2,6 +2,9 @@ package testScripts;
 
 import org.testng.annotations.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
+
 import static io.restassured.RestAssured.*;
 
 public class GETMethod {
@@ -25,6 +28,18 @@ public class GETMethod {
 
         given().get("https://reqres.in/api/users/2").then().log().all();
     }
-
+    /*
+    Getting Response Data
+     */
+    @Test
+    void responseData() throws IOException {
+        InputStream stream = get("https://reqres.in/api/users/2").asInputStream(); // Don't forget to close this one when you're done
+        byte[] byteArray = get("https://reqres.in/api/users/2").asByteArray();
+        String json = get("https://reqres.in/api/users/2").asString();
+        stream.close();
+        System.out.println("InputStream stream ---> " +stream );
+        System.out.println("byte[] byteArray ---> " +byteArray );
+        System.out.println("String json ---> " +json );
+    }
 
 }

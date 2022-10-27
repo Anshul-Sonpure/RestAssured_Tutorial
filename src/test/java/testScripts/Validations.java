@@ -5,6 +5,7 @@ import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import static io.restassured.RestAssured.*;
+import static io.restassured.path.xml.XmlPath.from;
 import static org.hamcrest.Matchers.*;
 
 
@@ -88,6 +89,22 @@ public class Validations {
     {
         given().when().get("http://www.thomas-bayer.com/sqlrest/CUSTOMER/1/").then()
                 .body("CUSTOMER.FIRSTNAME",equalTo("Susanne"));
+
+    }
+
+    @Test
+    void ValidateXmlPath()
+    {
+        String xml = given().when()
+                .get("http://www.thomas-bayer.com/sqlrest/CUSTOMER/1/").thenReturn().asString();
+        String firstName = from(xml).get("CUSTOMER.FIRSTNAME");
+        System.out.println(firstName);
+        Assert.assertEquals(firstName,"Susanne");
+        // or a bit more efficiently:
+        XmlPath xmlPath = new XmlPath(xml);
+        String LastName = xmlPath.get("CUSTOMER.LASTNAME");
+        System.out.println(LastName);
+        Assert.assertEquals(LastName,"King");
 
     }
 }
