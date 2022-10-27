@@ -14,8 +14,8 @@ public class Main {
 
     @Test
     public void readToken() throws IOException {
-        Path path = Paths.get("src/main/resources/token.txt");
-        Token = Files.readAllLines(path).get(0);
+        Path path = Paths.get("src/main/resources/response.json");
+        Token = Files.readAllLines(path).toString();
         System.out.println(Token);
     }
 

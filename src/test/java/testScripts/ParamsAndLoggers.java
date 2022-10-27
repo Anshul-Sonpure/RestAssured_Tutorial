@@ -72,6 +72,18 @@ public class ParamsAndLoggers {
                 .log().cookies();
     }
 
+    /* To log the request if validation fails */
+    @Test
+    public void LogifValidationFails()
+    {
+        given().log().ifValidationFails().queryParam("a","Aval").formParam("z","12")
+                .when().get("https://www.google.com/gmail/").then().statusCode(201);
+    }
 
-
+    /* To log the response if validation fails */
+    @Test
+    public void logifValidationFails()
+    {
+        given().get("https://reqres.in/api/users/2").then().log().ifValidationFails().statusCode(201);
+    }
 }
