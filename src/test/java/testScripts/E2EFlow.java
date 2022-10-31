@@ -88,8 +88,8 @@ public class E2EFlow {
     public void Get_AllUsers() throws IOException
     {
         JSONObject request = new JSONObject();
-        request.put("email","Demouser105@gmail.com");
-        request.put("password","Demo_user@105");
+        request.put("email","Demouser"+id+"@gmail.com");
+        request.put("password","Demo_user@"+id);
         Token = given().contentType("application/json")
                 .body(request)
                 .when().post("http://restapi.adequateshop.com/api/authaccount/login")
@@ -137,8 +137,8 @@ public class E2EFlow {
     public void GetuserbyId()
     {
         JSONObject request = new JSONObject();
-        request.put("email","Demouser105@gmail.com");
-        request.put("password","Demo_user@105");
+        request.put("email","Demouser"+id+"@gmail.com");
+        request.put("password","Demo_user@"+id);
         Token = given().contentType("application/json")
                 .body(request)
                 .when().post("http://restapi.adequateshop.com/api/authaccount/login")
