@@ -24,6 +24,7 @@ public class E2EFlow {
 
     public static int userId;
     public static String Token;
+    int id = (int)(Math.random()*(100-05+1)+05);
 
     /*
       In below we will see how we to perform End to End flow for api testing.
@@ -43,9 +44,9 @@ public class E2EFlow {
     @Test
     public void RegisterUser() throws IOException {
         JSONObject request = new JSONObject();
-        request.put("name","Demouser131");
-        request.put("email","Demouser131@gmail.com");
-        request.put("password","Demo_user@131");
+        request.put("name","Demouser"+id);
+        request.put("email","Demouser"+id+"@gmail.com");
+        request.put("password","Demo_user@"+id);
         Response response =
                 given()
                         .contentType("application/json")
@@ -67,8 +68,8 @@ public class E2EFlow {
     public void UserLogin()
     {
         JSONObject request = new JSONObject();
-        request.put("email","Demouser131@gmail.com");
-        request.put("password","Demo_user@131");
+        request.put("email","Demouser"+id+"@gmail.com");
+        request.put("password","Demo_user@"+id);
                 String logintoken = given()
                         .contentType("application/json")
                         .body(request)
@@ -111,22 +112,22 @@ public class E2EFlow {
     public void CreateUser()
     {
         JSONObject request = new JSONObject();
-        request.put("email","Demouser105@gmail.com");
-        request.put("password","Demo_user@105");
+        request.put("email","Demouser"+id+"@gmail.com");
+        request.put("password","Demo_user@"+id);
         Token = given().contentType("application/json")
                 .body(request)
                 .when().post("http://restapi.adequateshop.com/api/authaccount/login")
                 .then().extract().path("data.Token");
         System.out.println(Token);
         JSONObject createuser = new JSONObject();
-        createuser.put("name","IronMan02");
-        createuser.put("email","IronMan02@stark.io");
+        createuser.put("name","IronMan"+id);
+        createuser.put("email","IronMan"+id+"@stark.io");
         createuser.put("location","USA");
         given().header("Authorization","Bearer "+Token)
                 .header("Content-Type","application/json")
                 .body(createuser)
                 .when().post("http://restapi.adequateshop.com/api/users")
-                .then().body("email",equalTo("IronMan02@stark.io")).log().all();
+                .then().body("email",equalTo("IronMan"+id+"@stark.io")).log().all();
 
 
 
@@ -180,7 +181,7 @@ public class E2EFlow {
     public void DeleteUser()
     {
         given()
-                .when().delete("https://dummy.restapiexample.com/api/v1/delete/25")
+                .when().delete("https://dummy.restapiexample.com/api/v1/delete/"+id)
                 .then().statusCode(200)
                 .body("message",equalTo("Successfully! Record has been deleted")).log().all();
     }
