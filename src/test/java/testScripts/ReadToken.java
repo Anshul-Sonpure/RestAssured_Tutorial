@@ -1,18 +1,16 @@
 package testScripts;
 
-import org.RestAssured_Tutorials.BookDetails;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.prefs.Preferences;
 
 import static io.restassured.RestAssured.given;
 import static testScripts.E2EFlow.Token;
 
-public class Main {
+public class ReadToken {
 
     @Test
     public void readToken() throws IOException {

@@ -1,0 +1,7 @@
+testScripts\BlackListHeader.class
+testScripts\ParamsAndLoggers.class
+testScripts\E2EFlow.class
+testScripts\ReadToken.class
+testScripts\UploadFile.class
+testScripts\Validations.class
+testScripts\PutPatchDelete.class

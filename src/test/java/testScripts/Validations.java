@@ -1,12 +1,18 @@
 package testScripts;
+import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.path.xml.XmlPath;
 import io.restassured.response.Response;
+import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.regex.Pattern;
+
 import static io.restassured.RestAssured.*;
 import static io.restassured.path.xml.XmlPath.from;
 import static org.hamcrest.Matchers.*;
+import static org.hamcrest.text.MatchesPattern.matchesPattern;
 
 
 public class Validations {
@@ -107,4 +113,25 @@ public class Validations {
         Assert.assertEquals(LastName,"King");
 
     }
+
+    @Test
+    void ValidateViaPattern()
+    {
+        String pattern = "([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z)";
+        Pattern r = Pattern.compile(pattern);
+
+
+            JSONObject request = new JSONObject();
+            request.put("name", "morpheus");
+            request.put("job", "leader");
+            Response response = given()
+                    .body(request)
+                    .contentType(ContentType.JSON)
+                    .post("https://reqres.in/api/users");
+            JsonPath path = response.jsonPath();
+            String createdAt = path.get("createdAt");
+            response.then().assertThat()
+                    .body("createdAt", matchesPattern(pattern));
+            System.out.println(createdAt);
+        }
 }
