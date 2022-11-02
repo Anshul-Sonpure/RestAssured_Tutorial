@@ -15,6 +15,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.given;
+import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.text.MatchesPattern.matchesPattern;
 
 
@@ -27,6 +28,7 @@ public class Awaility_postRequest {
     public static Response response;
     String pattern = "([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z)";
     Pattern r = Pattern.compile(pattern);
+    String id;
     @Test
     public void PostUsingJsonObject() {
         for (int i = 0; i <= 10; i++) {
@@ -87,21 +89,35 @@ public class Awaility_postRequest {
         }
     }
 
-
+/*
+Below test is the best example how to use awaitility
+we are making a get call and after 5 seconds we make another get call using path parameter to an endpoint
+*/
     @Test
     void getViaAwaility() {
+        Response body = given().get("https://reqres.in/api/users/");
+        id = body.path("data[2].id").toString();
+        System.out.println("id is ::"+id);
         Awaitility.
                 await()
-                .atMost(10, TimeUnit.SECONDS)
+                .atMost(20, TimeUnit.SECONDS)
                 .pollInterval(1, TimeUnit.SECONDS)
                 .until(() ->
         {
-            final Response body = given().get("https://reqres.in/api/users/2");
-            final boolean status = body.path("data.email").equals("janet.weaver@reqres.in");
-            String email = body.path("data.email");
+            Thread.sleep(5000);
+            int z;
+            for(z =0;z<=5;z++){
+                Thread.sleep(1000);
+                System.out.println("Waiting:"+z+"seconds");
+            }
+            System.out.println("Calling Get request");
+                    response= given().pathParam("id",id).when().get("https://reqres.in/api/users/{id}");
+                    String email = response.path("data.email",equalTo("emma.wong@reqres.in").toString());
             System.out.println(email);
-            return status;
-
+                    if(response != null)
+                        return  true;
+                    else
+                        return false;
         });
 
     }
