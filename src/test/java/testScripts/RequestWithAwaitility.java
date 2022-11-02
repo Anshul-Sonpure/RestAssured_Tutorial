@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
  but when ranNum is even then a post call will be made
  next post call will be made once the status code is 200
  */
-public class Awaility_postRequest {
+public class RequestWithAwaitility {
     public static Response response;
     String pattern = "([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z)";
     Pattern r = Pattern.compile(pattern);
@@ -145,6 +145,17 @@ we are making a get call and after 5 seconds we make another get call using path
                 break;
             }
         }
+    }
+    /*
+    Another implementation for making a timeout request.
+     */
+    @Test(timeOut = 6000)
+    public void PrintResponse() throws InterruptedException {
+        for (int i = 1; i <= 4; i++) {
+            Thread.sleep(1000);
+            System.out.println(i+"Seconds");
+        }
+        given().get("https://reqres.in/api/users/2").then().log().all();
     }
 
 }

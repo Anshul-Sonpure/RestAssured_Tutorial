@@ -22,25 +22,12 @@ public class dummyClass {
         System.out.println("This test fails");
     }
 
-    @Test
-    public void PostUsingJsonObject() {
-        int code = 50;
-       int statuscode;
-        for (int i = 1; i <= 5; i++) {
-            statuscode = i * code;
-            System.out.println("random StatusCode" + statuscode);
-            Response response =
-                    given()
-                            .get("https://reqres.in/api/users/2")
-                            .andReturn();
-            if (statuscode == 200) {
-                int finalStatuscode = statuscode;
-                System.out.println("Making the get call");
-                Awaitility.await().atMost(Duration.TEN_SECONDS).pollInterval(Duration.TWO_SECONDS)
-                        .until(() -> response.statusCode() == finalStatuscode);
-                System.out.println("ResponseCode" + response.statusCode());
-                break;
-            }
+    @Test(timeOut = 6000)
+    public void PrintResponse() throws InterruptedException {
+        for (int i = 1; i <= 4; i++) {
+            Thread.sleep(1000);
+            System.out.println(i+"Seconds");
         }
+            given().get("https://reqres.in/api/users/2").then().log().all();
     }
 }
