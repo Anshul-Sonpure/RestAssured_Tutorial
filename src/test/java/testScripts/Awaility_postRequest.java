@@ -2,9 +2,7 @@ package testScripts;
 
 
 import io.restassured.http.ContentType;
-import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
-import org.RestAssured_Tutorials.BookDetails;
 import org.awaitility.Awaitility;
 import org.awaitility.Duration;
 import org.json.simple.JSONObject;
@@ -16,7 +14,7 @@ import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.text.MatchesPattern.matchesPattern;
+
 
 
 /*
@@ -120,6 +118,33 @@ we are making a get call and after 5 seconds we make another get call using path
                         return false;
         });
 
+    }
+/*
+   In below Await scenario we will make get call until the response code
+   matches 200
+   to mimick the status code received back we have used forloop
+    and some variable
+ */
+    @Test
+    public void AwaitwithResponseCode() {
+        int code = 50;
+        int statuscode;
+        for (int i = 1; i <= 5; i++) {
+            statuscode = i * code;
+            System.out.println("random StatusCode" + statuscode);
+            Response response =
+                    given()
+                            .get("https://reqres.in/api/users/2")
+                            .andReturn();
+            if (statuscode == 200) {
+                int finalStatuscode = statuscode;
+                System.out.println("Making the get call");
+                Awaitility.await().atMost(Duration.TEN_SECONDS).pollInterval(Duration.TWO_SECONDS)
+                        .until(() -> response.statusCode() == finalStatuscode);
+                System.out.println("ResponseCode" + response.statusCode());
+                break;
+            }
+        }
     }
 
 }
