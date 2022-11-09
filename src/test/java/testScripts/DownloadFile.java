@@ -76,7 +76,8 @@ public class DownloadFile {
         File file = new File("src/main/resources/sampleFile.jpeg");
         Response resp= RestAssured.given().multiPart(file).when().post("https://the-internet.herokuapp.com/upload")
                 .then().extract().response();
-        System.out.println("File uploaded with status code::"+resp.statusCode());
+        System.out.println("File uploaded with status code::"+resp.getStatusLine());
+        System.out.println(resp.getStatusLine());
 
     }
 }

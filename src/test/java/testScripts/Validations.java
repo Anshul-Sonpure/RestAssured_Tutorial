@@ -139,14 +139,20 @@ public class Validations {
             System.out.println(createdAt);
         }
 
+       /*
+           using .getlist() method we can fetch all related data at once. for e.g. we fetched rating here
+           from rating.rate.
+           Secondly we are filtering price based on rating where rating is >2
+        */
         @Test
-    public void employee_IDs_between()
+        public void employee_IDs_between()
         {
-            Response employeesResponse = RestAssured.given().get("https://reqres.in/api/users");
-            JsonPath jsonPathObj = employeesResponse.jsonPath();
+            Response products = RestAssured.given().get("https://fakestoreapi.com/products");
+            JsonPath path = products.jsonPath();
+            List<String> rating = path.getList("rating.rate");
+            System.out.println(rating);
+            List<String> prodt = path.getList("findAll{it.rating.rate>2}.price");
+            System.out.println(prodt);
 
-//get all employees id between 15 and 300
-            List<Map> employees = jsonPathObj.get("email.findAll { employee -> employee.id >= 1 && employee.id <= 6 }");
-            System.out.println(employees);
         }
 }
