@@ -1,14 +1,17 @@
 # RestAssured_Tutorial
 Hi All,
+This repository is for all those who want to learn API testing using rest assured.\
 In this repo I have written testscripts on how we can make GET,POST,PATCH/PUT and DELETE request in restassured for API Testing.\
-I have also covered some other testscripts like setting parameters,logging and how to do validation.\
+I have also covered some other testscripts like setting query,path and form parameters,how we can log data and how to do validation.\
 Also I have tried to cover an end to end flow for and API Testing.\
 Since this is not a framework hence no implementation for reporting is done.\
 But we can still integrate Extent Report with rest assured and build an API Testing Framework.\
 In Repo you will learn how to make GET call, POST using map,POJO class,JSON Object,Json file, PUT/PATCH/DELETE request.\
 How to set query,path parameter and how to log header,body, cookies.\
 How to blacklist header being print on console.\
-How to upload and download file using api call.
+How to upload and download file using api call.\
+How to Test asynchronous systems, using Awaitility which is a DSL that\
+allows you to express expectations of an asynchronous system in a concise and easy to read manner.
 
 ## Features
 - Rest assured is java library for testing Restful Web services. It can be used to test XML & JSON based web services. 
