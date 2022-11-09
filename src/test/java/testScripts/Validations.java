@@ -1,5 +1,7 @@
 package testScripts;
+import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.path.xml.XmlPath;
 import io.restassured.response.Response;
@@ -7,6 +9,8 @@ import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import static io.restassured.RestAssured.*;
@@ -133,5 +137,16 @@ public class Validations {
             response.then().assertThat()
                     .body("createdAt", matchesPattern(pattern));
             System.out.println(createdAt);
+        }
+
+        @Test
+    public void employee_IDs_between()
+        {
+            Response employeesResponse = RestAssured.given().get("https://reqres.in/api/users");
+            JsonPath jsonPathObj = employeesResponse.jsonPath();
+
+//get all employees id between 15 and 300
+            List<Map> employees = jsonPathObj.get("email.findAll { employee -> employee.id >= 1 && employee.id <= 6 }");
+            System.out.println(employees);
         }
 }
