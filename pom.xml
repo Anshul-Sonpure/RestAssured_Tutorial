@@ -72,17 +72,13 @@
         <version>7.6.1</version>
         <scope>compile</scope>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
     <dependency>
         <groupId>com.aventstack</groupId>
         <artifactId>extentreports</artifactId>
-        <version>3.0.7</version>
+        <version>5.0.9</version>
     </dependency>
 
-    <dependency>
-        <groupId>com.relevantcodes</groupId>
-        <artifactId>extentreports</artifactId>
-        <version>2.41.2</version>
-    </dependency>
 
     <!-- https://mvnrepository.com/artifact/org.awaitility/awaitility -->
     <dependency>
@@ -91,12 +87,16 @@
         <version>3.0.0</version>
         <scope>test</scope>
     </dependency>
+    <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.22</version>
+    </dependency>
 
 </dependencies>
     <properties>
         <maven.compiler.source>18</maven.compiler.source>
         <maven.compiler.target>18</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
 </project>

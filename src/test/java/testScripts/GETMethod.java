@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 import static io.restassured.RestAssured.*;
 
-public class GETMethod {
+public class GETMethod extends ExtentReporterNG {
 
      /* In below test we will make get request to our endpoint
     1. validate StatusCode
@@ -18,7 +18,9 @@ public class GETMethod {
     @Test
     public void ValidateStatusCode()
     {
+
         given().get("https://bookstore.toolsqa.com/BookStore/v1/Books").then().statusCode(200);
+
     }
 
     //Print response in logs
@@ -27,6 +29,7 @@ public class GETMethod {
     {
 
         given().get("https://reqres.in/api/users/2").then().log().all();
+
     }
     /*
     Getting Response Data
@@ -42,6 +45,7 @@ public class GETMethod {
         System.out.println("InputStream stream ---> " +stream );
         System.out.println("byte[] byteArray ---> " +byteArray );
         System.out.println("String json ---> " +json );
+
     }
 
 }

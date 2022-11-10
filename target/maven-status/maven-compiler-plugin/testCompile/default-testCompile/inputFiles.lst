@@ -1,13 +1,15 @@
-D:\project\RestAssured_Tutorials\src\test\java\testScripts\Awaitility.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\Validations.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\E2EFlow.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\PropertyTransfer.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\PostMethod.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\ReadToken.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\UploadFile.java
+D:\project\RestAssured_Tutorials\src\test\java\testScripts\dummyClass.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\ParamsAndLoggers.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\BlackListHeader.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\Deserialization.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\DownloadFile.java
+D:\project\RestAssured_Tutorials\src\test\java\testScripts\Setup.java
+D:\project\RestAssured_Tutorials\src\test\java\testScripts\RequestWithAwaitility.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\PutPatchDelete.java
 D:\project\RestAssured_Tutorials\src\test\java\testScripts\GETMethod.java

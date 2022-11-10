@@ -1,11 +1,11 @@
-# RestAssured_Tutorial
+# RestAssured Tutorial
 Hi All,
 This repository is for all those who want to learn API testing using rest assured.\
 In this repo I have written testscripts on how we can make GET,POST,PATCH/PUT and DELETE request in restassured for API Testing.\
 I have also covered some other testscripts like setting query,path and form parameters,how we can log data and how to do validation.\
 Also I have tried to cover an end to end flow for and API Testing.\
-Since this is not a framework hence no implementation for reporting is done.\
-But we can still integrate Extent Report with rest assured and build an API Testing Framework.\
+Implemented Extent Report for Reporting,still working on enhancement for the\
+reporting part in extent-report.\
 In Repo you will learn how to make GET call, POST using map,POJO class,JSON Object,Json file, PUT/PATCH/DELETE request.\
 How to set query,path parameter and how to log header,body, cookies.\
 How to blacklist header being print on console.\
@@ -56,6 +56,9 @@ To run the project either execute each testscript or
 ```
 mvn test
 ```
+- Note: Please feel free to provide your valuable comments for making this repo better.
+Suggestions regarding the extent report part is most welcomed and much appreciated.
+
 Thank You\
 Happy Coding,\
 Learn,Code and Earn\

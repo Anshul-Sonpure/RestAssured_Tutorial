@@ -1,32 +1,38 @@
 package testScripts;
 
 /*
-    In below test we will blacklist some of the response headers from being logged in console.
+    In below test we will blacklist some response headers from being logged in console.
  */
 
+import com.aventstack.extentreports.Status;
 import io.restassured.RestAssured;
 import io.restassured.config.LogConfig;
+import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
 import org.testng.annotations.Test;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class BlackListHeader {
+public class BlackListHeader extends ExtentReporterNG {
     @Test
-    public  void BlacklistHeaders()
-    {
+    public void BlacklistHeaders() {
+
         List headers = new ArrayList<String>();
         headers.add("Server");
-        headers.add("report-to");
         headers.add("Etag");
 
-            given().config(RestAssured.config().logConfig(LogConfig.logConfig().blacklistHeaders(headers)))
-                        .log().headers().get("https://jsonplaceholder.typicode.com/posts/1")
-            .then().log().headers();
+        Response response = given().config(RestAssured.config().logConfig(LogConfig.logConfig().blacklistHeaders(headers)))
+                .get("https://jsonplaceholder.typicode.com/posts/1")
+                .then().log().headers().extract().response();
+        test.log(test.getStatus(), response.getStatusLine());
+
+
+
     }
-
-
-
 }

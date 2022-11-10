@@ -1,26 +1,18 @@
 package testScripts;
 
-import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Scanner;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
-public class E2EFlow {
+public class E2EFlow extends ExtentReporterNG {
 
     public static int userId;
     public static String Token;
@@ -43,6 +35,8 @@ public class E2EFlow {
 
     @Test
     public void RegisterUser() throws IOException {
+
+
         JSONObject request = new JSONObject();
         request.put("name","Demouser"+id);
         request.put("email","Demouser"+id+"@gmail.com");
@@ -60,7 +54,7 @@ public class E2EFlow {
         fWriter.write(Token);
         System.out.println("UserId is : "+ userId + "&"+"Token is: "+ Token);
         fWriter.close();
-
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
     }
 
 
@@ -78,6 +72,7 @@ public class E2EFlow {
                         .then().extract().path("data.Token");
 
         System.out.println(logintoken);
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
     }
 
     /*
@@ -104,7 +99,7 @@ public class E2EFlow {
                 .assertThat().
                 body("data.id",hasItems(11133, 11134, 11135, 11136, 11137, 11138, 11139, 11140, 11142, 11143))
                 .log().all();
-
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
 
     }
 
@@ -128,8 +123,7 @@ public class E2EFlow {
                 .body(createuser)
                 .when().post("http://restapi.adequateshop.com/api/users")
                 .then().body("email",equalTo("IronMan"+id+"@stark.io")).log().all();
-
-
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
 
     }
 
@@ -151,6 +145,8 @@ public class E2EFlow {
                 .statusCode(200)
                 .body("email",equalTo("IronMan02@stark.io"))
                 .log().all();
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
     }
 
     /*
@@ -175,7 +171,6 @@ public class E2EFlow {
 
 
     }
-
 
     @Test(dependsOnMethods = {"UserLogin"})
     public void DeleteUser()

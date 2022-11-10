@@ -12,7 +12,8 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.junit.Assert.assertThat;
 
 
-public class Deserialization {
+public class Deserialization extends ExtentReporterNG {
+
 
     /*
         In below test we are going to see how we can perform deSerialization,
@@ -23,12 +24,14 @@ public class Deserialization {
     @Test
     public void deSerialization()
     {
+
         UserDetails usrdt = given()
-                .get("https://gorest.co.in/public/v2/users/18").as(UserDetails.class);
+                .get("https://gorest.co.in/public/v2/users/4933").as(UserDetails.class);
         System.out.println(usrdt.getName());
         System.out.println(usrdt.getEmail());
         System.out.println(usrdt.getGender());
         System.out.println(usrdt.getStatus());
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
 
     }
     /*io.restassured.mapper.TypeRef class that allows you to de-serialize the response
@@ -37,12 +40,15 @@ public class Deserialization {
     @Test
     public void DeserializationwithGenerics()
     {
+
         List<Map<String, Object>> users = given().
                 get("https://jsonplaceholder.typicode.com/comments?postId=1").as(new TypeRef<List<Map<String, Object>>>() {});
                 assertThat(users.get(0).get("id"),equalTo(1));
                 assertThat(users.get(0).get("email"),equalTo("Eliseo@gardner.biz"));
         assertThat(users.get(2).get("id"),equalTo(3));
         assertThat(users.get(2).get("email"),equalTo("Nikita@garfield.biz"));
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
     }
 
 }

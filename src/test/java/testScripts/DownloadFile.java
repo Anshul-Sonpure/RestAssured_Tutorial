@@ -11,7 +11,7 @@ import java.nio.file.Files;
 
 import static io.restassured.RestAssured.given;
 
-public class DownloadFile {
+public class DownloadFile extends ExtentReporterNG {
     /*
         In below test we are performing how to download
         upload a file using HTTP methods.
@@ -25,7 +25,9 @@ public class DownloadFile {
      */
 
     @Test
-    public void DownloadtextFile() throws IOException {
+    public void DownloadtextFile() throws IOException
+    {
+
         Response response = given()
                 .log().all().when()
                 .get("https://the-internet.herokuapp.com/download/test.txt").andReturn();
@@ -35,26 +37,30 @@ public class DownloadFile {
                 true);
         fout.write(bytes);
         fout.close();
-
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
     }
 
     @Test
-    void DownloadZipFile() throws IOException {
+    void DownloadZipFile() throws IOException
+    {
         byte[] dowloadedFile = RestAssured.given().when()
                 .get("https://chercher.tech/files/minion.zip")
                 .then().extract().asByteArray();
         File file = new File("src/main/resources/minion.zip");
         Files.write(file.toPath(), dowloadedFile);
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
     }
 
 
     @Test
     void DownloadImgFile() throws IOException {
+
         byte[] dowloadedFile = RestAssured.given().when()
                 .get("https://the-internet.herokuapp.com/download/sampleFile.jpeg")
                 .then().extract().asByteArray();
         File file = new File("src/main/resources/sampleFile.jpeg");
         Files.write(file.toPath(), dowloadedFile);
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
     }
 
     /*
@@ -63,21 +69,26 @@ public class DownloadFile {
      */
     @Test
     public void SaveJsonResponsetoFile() throws IOException {
+
         Response response = given().get("https://reqres.in/api/users/2").andReturn();
         byte[] bytes = response.asByteArray();
         File file = new File("src/main/resources/response.json");
         Files.write(file.toPath(),bytes);
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
 
     }
 
     @Test
     public void UploadFile()
     {
+
         File file = new File("src/main/resources/sampleFile.jpeg");
         Response resp= RestAssured.given().multiPart(file).when().post("https://the-internet.herokuapp.com/upload")
                 .then().extract().response();
         System.out.println("File uploaded with status code::"+resp.getStatusLine());
         System.out.println(resp.getStatusLine());
+        test.log(test.getStatus(),resp.getStatusLine());
+        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
 
     }
 }
