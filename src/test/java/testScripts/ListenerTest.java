@@ -2,6 +2,7 @@ package testScripts;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
+import com.aventstack.extentreports.Status;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
@@ -19,17 +20,19 @@ public class ListenerTest implements ITestListener {
 
     @Override
     public void onTestSuccess(ITestResult result) {
-        test.get().pass("Test passed");
+        test.get().log(Status.PASS,"Test Case: "+result.getMethod().getMethodName()+ " is passed.");
     }
 
     @Override
     public void onTestFailure(ITestResult result) {
         test.get().fail(result.getThrowable());
+        test.get().log(Status.PASS,"Test Case: "+result.getMethod().getMethodName()+ " is failed.");
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         test.get().skip(result.getThrowable());
+        test.get().log(Status.PASS,"Test Case: "+result.getMethod().getMethodName()+ " is skipped.");
     }
 
 
