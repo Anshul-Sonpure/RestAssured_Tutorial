@@ -7,13 +7,12 @@ package testScripts;
  */
 
 
-import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class PropertyTransfer {
+public class PropertyTransfer extends testScripts.ListenerTest {
 
     String id;
     @Test

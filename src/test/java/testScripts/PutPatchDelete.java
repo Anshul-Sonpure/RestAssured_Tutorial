@@ -5,7 +5,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class PutPatchDelete {
+public class PutPatchDelete extends testScripts.ListenerTest{
 
     /*
         In below test we will make Patch,Put and delete request

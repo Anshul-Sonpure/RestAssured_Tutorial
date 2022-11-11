@@ -7,7 +7,7 @@ import java.io.InputStream;
 
 import static io.restassured.RestAssured.*;
 
-public class GETMethod extends ExtentReporterNG {
+public class GETMethod extends testScripts.ListenerTest {
 
      /* In below test we will make get request to our endpoint
     1. validate StatusCode

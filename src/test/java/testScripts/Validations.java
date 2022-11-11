@@ -1,19 +1,18 @@
 package testScripts;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import io.restassured.http.Method;
 import io.restassured.path.json.JsonPath;
 import io.restassured.path.xml.XmlPath;
 import io.restassured.response.Response;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
-import org.testng.ITestResult;
-import org.testng.Reporter;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.*;
 import static io.restassured.path.xml.XmlPath.from;
@@ -22,7 +21,7 @@ import static org.hamcrest.text.MatchesPattern.matchesPattern;
 
 
 
-public class Validations extends ExtentReporterNG {
+public class Validations extends testScripts.ListenerTest {
 
     /* In below test we will validate in our given
     endpoint whether the response contains given certain data or not
@@ -37,7 +36,6 @@ public class Validations extends ExtentReporterNG {
     @Test
     public void ValidateMultipleContent() {
 
-
         given()
                 .when()
                 .get("https://jsonplaceholder.typicode.com/users")
@@ -46,7 +44,7 @@ public class Validations extends ExtentReporterNG {
                 .contentType("application/json")
                 .assertThat().
                 body("email",hasItems("Sincere@april.biz","Shanna@melissa.tv","Nathan@yesenia.net","Julianne.OConner@kory.org","Lucio_Hettinger@annie.ca"));
-            test.info("Validated response body has Items"+"---"+"Sincere@april.biz,Shanna@melissa.tv,Nathan@yesenia.net,Julianne.OConner@kory.org,Lucio_Hettinger@annie.ca");
+            test.get().info("Validated response body has Items"+"---"+"Sincere@april.biz,Shanna@melissa.tv,Nathan@yesenia.net,Julianne.OConner@kory.org,Lucio_Hettinger@annie.ca");
 
     }
 
@@ -60,7 +58,7 @@ public class Validations extends ExtentReporterNG {
                 .get("https://jsonplaceholder.typicode.com/users")
                 .then().assertThat().body("username",hasItems("Bret","Antonette","Samantha"));
 
-        test.info("Validated response body has username"+"---"+"Bret\",\"Antonette\",\"Samantha");
+        test.get().info("Validated response body has username"+"---"+"Bret\",\"Antonette\",\"Samantha");
 
 
     }
@@ -75,7 +73,7 @@ public class Validations extends ExtentReporterNG {
                 .get("https://jsonplaceholder.typicode.com/users")
                 .then()
                 .body("[3].email",equalTo("Julianne.OConner@kory.org"));
-        test.info("Validated response body has email of 3rd user as "+"---"+"Julianne.OConner@kory.org");
+        test.get().info("Validated response body has email of 3rd user as "+"---"+"Julianne.OConner@kory.org");
     }
 
     //Validate content via JSON Path
@@ -91,7 +89,7 @@ public class Validations extends ExtentReporterNG {
                 .extract()
                 .path("data[3].first_name");
         Assert.assertEquals(firstname,"Byron");
-        test.info("Validated response body has first_name of 3rd user "+"---"+firstname);
+        test.get().info("Validated response body has first_name of 3rd user "+"---"+firstname);
     }
 
     //Another way to validate JSON path
@@ -105,7 +103,7 @@ public class Validations extends ExtentReporterNG {
         JsonPath path = response.jsonPath();
         String email = path.get("data[3].email");
         Assert.assertEquals(email,"byron.fields@reqres.in");
-
+        test.get().info("Validated response body has email of 3rd user "+"---"+email);
 
     }
 
@@ -114,14 +112,13 @@ public class Validations extends ExtentReporterNG {
     {
         given().when().get("http://www.thomas-bayer.com/sqlrest/CUSTOMER/1/").then()
                 .body("CUSTOMER.FIRSTNAME",equalTo("Susanne"));
-
+        test.get().info("Validated CUSTOMER.FIRSTNAME is Susanne");
     }
 
     @Test
     void ValidateXmlPath()
     {
-       ITestResult result = null;
-        test = extent.createTest(result.getMethod().getMethodName()).assignAuthor(System.getProperty("user.name"));
+
         String xml = given().when()
                 .get("http://www.thomas-bayer.com/sqlrest/CUSTOMER/1/").thenReturn().asString();
         String firstName = from(xml).get("CUSTOMER.FIRSTNAME");
@@ -132,17 +129,15 @@ public class Validations extends ExtentReporterNG {
         String LastName = xmlPath.get("CUSTOMER.LASTNAME");
         System.out.println(LastName);
         Assert.assertEquals(LastName,"King");
-
+        test.get().info("Validated CUSTOMER.LASTNAME is King");
     }
 
     @Test
     void ValidateViaPattern()
     {
-        test = extent.createTest("ValidateViaPattern").assignAuthor(System.getProperty("user.name"));
+
         String pattern = "([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z)";
         Pattern r = Pattern.compile(pattern);
-
-
             JSONObject request = new JSONObject();
             request.put("name", "morpheus");
             request.put("job", "leader");
@@ -155,6 +150,7 @@ public class Validations extends ExtentReporterNG {
             response.then().assertThat()
                     .body("createdAt", matchesPattern(pattern));
             System.out.println(createdAt);
+        test.get().info("Validate createdAt Via Pattern");
         }
 
        /*
@@ -165,15 +161,17 @@ public class Validations extends ExtentReporterNG {
         @Test
         public void JsonwithFilters()
         {
-            test = extent.createTest("JsonwithFilters").assignAuthor(System.getProperty("user.name"));
             Response products = RestAssured.given().get("https://fakestoreapi.com/products");
             JsonPath path = products.jsonPath();
             List<String> rating = path.getList("rating.rate");
             System.out.println(rating);
-            List<String> prodt = path.getList("findAll{it.rating.rate>2}.price");
-            System.out.println(prodt);
-//            String rate_prod = path.getString("find{it.category == 'men's clothing' & it.title == 'Mens Cotton Jacket'}.price");
-//            System.out.println(rate_prod);
-            test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+            List<String> prodt = new ArrayList<>((Arrays.asList("22.3", "55.99", "695", "109", "114", "9.85", "7.95")));
+            List<String> actualprd = path.getList("findAll{it.rating.rate>4}.price").stream()
+                    .map(val -> String.valueOf(val)).collect(Collectors.toList());
+            if(prodt.containsAll(actualprd))
+            {
+                test.get().info("Validated Json With Filters"+" "+actualprd);
+            }
+
         }
 }

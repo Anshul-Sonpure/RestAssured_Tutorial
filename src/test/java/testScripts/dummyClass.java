@@ -1,15 +1,11 @@
 package testScripts;
 
-import io.restassured.http.ContentType;
-import io.restassured.response.Response;
-import org.awaitility.Awaitility;
-import org.awaitility.Duration;
-import org.json.simple.JSONObject;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class dummyClass {
+public class dummyClass extends testScripts.ListenerTest {
+
     @Test(timeOut = 2000) // time in milliseconds
     public void PassTest() throws InterruptedException {
         Thread.sleep(1000);

@@ -10,7 +10,7 @@ import java.nio.file.Paths;
 import static io.restassured.RestAssured.given;
 import static testScripts.E2EFlow.Token;
 
-public class ReadToken {
+public class ReadToken extends testScripts.ListenerTest {
 
     @Test
     public void readToken() throws IOException {

@@ -11,7 +11,7 @@ import java.nio.file.Files;
 
 import static io.restassured.RestAssured.given;
 
-public class DownloadFile extends ExtentReporterNG {
+public class DownloadFile extends testScripts.ListenerTest {
     /*
         In below test we are performing how to download
         upload a file using HTTP methods.
@@ -37,7 +37,7 @@ public class DownloadFile extends ExtentReporterNG {
                 true);
         fout.write(bytes);
         fout.close();
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
     }
 
     @Test
@@ -48,7 +48,7 @@ public class DownloadFile extends ExtentReporterNG {
                 .then().extract().asByteArray();
         File file = new File("src/main/resources/minion.zip");
         Files.write(file.toPath(), dowloadedFile);
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
     }
 
 
@@ -60,7 +60,7 @@ public class DownloadFile extends ExtentReporterNG {
                 .then().extract().asByteArray();
         File file = new File("src/main/resources/sampleFile.jpeg");
         Files.write(file.toPath(), dowloadedFile);
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
     }
 
     /*
@@ -74,7 +74,7 @@ public class DownloadFile extends ExtentReporterNG {
         byte[] bytes = response.asByteArray();
         File file = new File("src/main/resources/response.json");
         Files.write(file.toPath(),bytes);
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
 
     }
 
@@ -87,8 +87,8 @@ public class DownloadFile extends ExtentReporterNG {
                 .then().extract().response();
         System.out.println("File uploaded with status code::"+resp.getStatusLine());
         System.out.println(resp.getStatusLine());
-        test.log(test.getStatus(),resp.getStatusLine());
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+        test.get().log(test.get().getStatus(),resp.getStatusLine());
+
 
     }
 }

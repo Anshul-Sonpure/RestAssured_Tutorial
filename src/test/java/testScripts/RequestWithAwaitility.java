@@ -22,7 +22,7 @@ import static org.hamcrest.Matchers.equalTo;
  but when ranNum is even then a post call will be made
  next post call will be made once the status code is 200
  */
-public class RequestWithAwaitility {
+public class RequestWithAwaitility extends testScripts.ListenerTest{
     public static Response response;
     String pattern = "([0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}.[0-9]{3}Z)";
     Pattern r = Pattern.compile(pattern);
@@ -51,7 +51,9 @@ public class RequestWithAwaitility {
                 System.out.println("ranNum::" + ranNum);
                 System.out.println("User not created");
             }
+
         }
+
     }
 
     /*
@@ -117,7 +119,6 @@ we are making a get call and after 5 seconds we make another get call using path
                     else
                         return false;
         });
-
     }
 /*
    In below Await scenario we will make get call until the response code
@@ -155,7 +156,9 @@ we are making a get call and after 5 seconds we make another get call using path
             Thread.sleep(1000);
             System.out.println(i+"Seconds");
         }
-        given().get("https://reqres.in/api/users/2").then().log().all();
+       given().get("https://reqres.in/api/users/2").then().log().all();
+
     }
+
 
 }

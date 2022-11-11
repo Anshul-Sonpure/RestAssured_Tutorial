@@ -7,7 +7,7 @@ import java.io.File;
 
 import static io.restassured.RestAssured.given;
 
-public class UploadFile {
+public class UploadFile extends testScripts.ListenerTest {
 
     /*
         In below test we will upload file from resources folder to the server
@@ -24,7 +24,11 @@ public class UploadFile {
                 .multiPart("file",file,"multipart/form-data")
                 .post("https://the-internet.herokuapp.com/upload")
                 .thenReturn();
-        System.out.println(response.prettyPrint());
+        String StatusLine = response.getStatusLine();
+        if(response.getStatusLine() == StatusLine)
+        {
+            test.get().info("File uploaded sucessfully"+" "+StatusLine);
+        }
 
     }
 

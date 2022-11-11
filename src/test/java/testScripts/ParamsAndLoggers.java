@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
 
-public class ParamsAndLoggers {
+public class ParamsAndLoggers extends testScripts.ListenerTest{
 
     /*
     In the below test cases we will see what all data can be logged

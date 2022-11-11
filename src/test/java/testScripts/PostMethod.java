@@ -9,12 +9,11 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.util.HashMap;
-import java.util.Objects;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 
-public class PostMethod {
+public class PostMethod extends testScripts.ListenerTest {
 
     /* In below test will be making POST call in
      different ways.

@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.hasItems;
 
-public class E2EFlow extends ExtentReporterNG {
+public class E2EFlow extends testScripts.ListenerTest {
 
     public static int userId;
     public static String Token;
@@ -54,7 +54,7 @@ public class E2EFlow extends ExtentReporterNG {
         fWriter.write(Token);
         System.out.println("UserId is : "+ userId + "&"+"Token is: "+ Token);
         fWriter.close();
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
     }
 
 
@@ -72,7 +72,7 @@ public class E2EFlow extends ExtentReporterNG {
                         .then().extract().path("data.Token");
 
         System.out.println(logintoken);
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
     }
 
     /*
@@ -99,7 +99,7 @@ public class E2EFlow extends ExtentReporterNG {
                 .assertThat().
                 body("data.id",hasItems(11133, 11134, 11135, 11136, 11137, 11138, 11139, 11140, 11142, 11143))
                 .log().all();
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
 
     }
 
@@ -123,7 +123,7 @@ public class E2EFlow extends ExtentReporterNG {
                 .body(createuser)
                 .when().post("http://restapi.adequateshop.com/api/users")
                 .then().body("email",equalTo("IronMan"+id+"@stark.io")).log().all();
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
 
     }
 
@@ -145,7 +145,7 @@ public class E2EFlow extends ExtentReporterNG {
                 .statusCode(200)
                 .body("email",equalTo("IronMan02@stark.io"))
                 .log().all();
-        test.log(test.getStatus(),"test is "+test.getStatus()+"ed");
+
 
     }
 
