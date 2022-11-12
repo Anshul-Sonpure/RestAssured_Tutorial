@@ -26,13 +26,13 @@ public class ListenerTest implements ITestListener {
     @Override
     public void onTestFailure(ITestResult result) {
         test.get().fail(result.getThrowable());
-        test.get().log(Status.PASS,"Test Case: "+result.getMethod().getMethodName()+ " is failed.");
+        test.get().log(Status.FAIL,"Test Case: "+result.getMethod().getMethodName()+ " is failed.");
     }
 
     @Override
     public void onTestSkipped(ITestResult result) {
         test.get().skip(result.getThrowable());
-        test.get().log(Status.PASS,"Test Case: "+result.getMethod().getMethodName()+ " is skipped.");
+        test.get().log(Status.SKIP,"Test Case: "+result.getMethod().getMethodName()+ " is skipped.");
     }
 
 
