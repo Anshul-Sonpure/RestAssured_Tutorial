@@ -2,6 +2,7 @@ package testScripts;
 
 import io.restassured.http.ContentType;
 import org.RestAssured_Tutorials.BookDetails;
+import org.RestAssured_Tutorials.DummyUser;
 import org.json.simple.JSONObject;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -126,5 +127,16 @@ public class PostMethod extends testScripts.ListenerTest {
                 .body(object)
                 .when().post("https://jsonplaceholder.typicode.com/users")
                 .then().statusCode(201).log().all();
+    }
+
+    @Test
+    public void DummyUserBuilder()
+    {
+        DummyUser Dummyuser = DummyUser.builder().firstName("Maddock").lastName("Kenith").age("32").gender("Male")
+                .username("KenMad").password("Mad@Ken12").build();
+        given().contentType("application/json")
+                .body(Dummyuser)
+                .when().post("https://dummyjson.com/users/add")
+                .then().statusCode(200).log().all();
     }
 }
