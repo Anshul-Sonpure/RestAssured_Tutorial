@@ -20,7 +20,7 @@ public class PrintJsonElement {
  */
 
     @Test
-    public void demo1()
+    public void idUsingMap()
     {
         Response res = given().get("https://automationexercise.com/api/productsList");
         JsonPath path = res.jsonPath();
@@ -35,7 +35,7 @@ public class PrintJsonElement {
              if(map.containsKey("name") &&  map.get("name").toString().equalsIgnoreCase(prdname) )
                 id = map.get("id").toString();
         }
-        System.out.println(id);
+        System.out.println("Id is :"+id);
     }
     /*
     Another way for doing the same is using find in jsonpath
@@ -44,15 +44,21 @@ public class PrintJsonElement {
     @Test
     public void JsonwithFilters()
     {
-        Response response = RestAssured.given().get("https://fakestoreapi.com/products");
-        JsonPath path = response.jsonPath();
-//        List<String> prds = path.getList("title");
-//        System.out.println(prds);
-        System.out.println("Id"+path.getString("find{it.title == 'Mens Cotton Jacket'}.id"));
         Response res= RestAssured.given().get("https://automationexercise.com/api/productsList");
         JsonPath jsonPath = res.jsonPath();
-
         System.out.println(jsonPath.getString("products.find{it.name =='Green Side Placket Detail T-Shirt'}.id"));
+    }
+
+    @Test
+    public void ExtractElementUsingFind()
+    {
+        String id = given().when().get("https://automationexercise.com/api/productsList").andReturn()
+                .jsonPath().getString("products.find{it.name=='Green Side Placket Detail T-Shirt'}.id");
+        System.out.println("Green Side Placket Detail T-Shirt, id is:"+id);
+        List products = given().when().get("https://automationexercise.com/api/productsList").andReturn()
+                .jsonPath().getList("products.findAll{it.name}.name");
+        System.out.println("Products"+products);
+
     }
 
 }

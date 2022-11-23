@@ -1,29 +1,23 @@
 package testScripts;
 
+import io.restassured.RestAssured;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
+import io.restassured.response.ResponseBody;
 import org.testng.annotations.Test;
+
+import java.util.List;
+
+import static io.restassured.RestAssured.given;
 
 public class democlass extends testScripts.ListenerTest {
 
 
     @Test
-    public void demotest1(){
-        System.out.println("demotest1");
+    public void ExtractElementUsingFind()
+    {
+        String id = given().when().get("https://automationexercise.com/api/productsList").andReturn()
+                .jsonPath().getString("products.find{it.name=='Green Side Placket Detail T-Shirt'}.id");
+        System.out.println(id);
     }
-    @Test
-    public void demotest2(){
-        System.out.println("demotest2");
-    }
-    @Test
-    public void demotest3(){
-        System.out.println("demotest3");
-    }
-    @Test
-    public void demotest4(){
-        System.out.println("demotest4");
-    }
-    @Test
-    public void demotest5(){
-        System.out.println("demotest5");
-    }
-
 }
