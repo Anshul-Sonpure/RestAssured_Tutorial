@@ -11,12 +11,18 @@ public class ListenerTest implements ITestListener {
 
     public static ExtentReports extent = base1.ExtentManager.createInstance();
     public static ThreadLocal<ExtentTest> test = new ThreadLocal<>();
+    public static String className;
     @Override
     public void onTestStart(ITestResult result) {
-        ExtentTest extentTest = extent.createTest(result.getMethod().getMethodName(),result.getMethod().getDescription())
+        String classname = result.getTestClass().getName();
+        classname=classname.replace("testScripts.","");
+        ExtentTest extentTest = extent.createTest(result.getTestClass().getName())
+                .createNode(result.getMethod().getMethodName())
                 .assignAuthor(System.getProperty("user.name"));
         test.set(extentTest);
     }
+
+
 
     @Override
     public void onTestSuccess(ITestResult result) {

@@ -46,7 +46,7 @@ public class RequestWithAwaitility extends testScripts.ListenerTest{
                 Awaitility.await().atMost(Duration.TEN_SECONDS).pollInterval(Duration.TWO_SECONDS)
                         .until(() -> response.statusCode() == 200);
                 System.out.println(response.statusCode());
-
+                test.get().info("User created as: "+request);
             } else {
                 System.out.println("ranNum::" + ranNum);
                 System.out.println("User not created");
@@ -81,7 +81,7 @@ public class RequestWithAwaitility extends testScripts.ListenerTest{
                 Awaitility.await().atMost(Duration.TEN_SECONDS).pollInterval(Duration.TWO_SECONDS)
                         .until(() -> response.statusCode() == 202);
                 System.out.println(response.statusCode());
-
+                test.get().info("User created as: "+request);
             } else {
                 System.out.println("ranNum::" + ranNum);
                 System.out.println("User not created");
@@ -114,10 +114,12 @@ we are making a get call and after 5 seconds we make another get call using path
                     response= given().pathParam("id",id).when().get("https://reqres.in/api/users/{id}");
                     String email = response.path("data.email",equalTo("emma.wong@reqres.in").toString());
             System.out.println(email);
-                    if(response != null)
-                        return  true;
-                    else
-                        return false;
+
+                    if(response != null){
+                        test.get().info("Get Call made:"+response.prettyPrint());
+                        return  true;}
+                    else{
+                        return false;}
         });
     }
 /*
@@ -145,6 +147,7 @@ we are making a get call and after 5 seconds we make another get call using path
                 System.out.println("ResponseCode" + response.statusCode());
                 break;
             }
+            test.get().info("Response:"+response.prettyPrint());
         }
     }
     /*

@@ -6,14 +6,12 @@ import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import static io.restassured.RestAssured.given;
 
-public class PrintJsonElement {
+public class PrintJsonElement extends ListenerTest {
 /*
  In below we will iterate over the products to find the id corresponding to
  product name="Green Side Placket Detail T-Shirt"
@@ -36,6 +34,7 @@ public class PrintJsonElement {
                 id = map.get("id").toString();
         }
         System.out.println("Id is :"+id);
+        test.get().info("Green Side Placket Detail T-Shirt id:"+id);
     }
     /*
     Another way for doing the same is using find in jsonpath
@@ -47,6 +46,7 @@ public class PrintJsonElement {
         Response res= RestAssured.given().get("https://automationexercise.com/api/productsList");
         JsonPath jsonPath = res.jsonPath();
         System.out.println(jsonPath.getString("products.find{it.name =='Green Side Placket Detail T-Shirt'}.id"));
+        test.get().info("Fetching product id using jsonpath filter");
     }
 
     @Test
@@ -59,6 +59,7 @@ public class PrintJsonElement {
                 .jsonPath().getList("products.findAll{it.name}.name");
         System.out.println("Products"+products);
 
+        test.get().info("Fetching data from reponse"+id);
     }
 
 }

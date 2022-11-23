@@ -1,6 +1,7 @@
 package testScripts;
 
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.RestAssured_Tutorials.BookDetails;
 import org.RestAssured_Tutorials.DummyUser;
 import org.json.simple.JSONObject;
@@ -36,13 +37,14 @@ public class PostMethod extends testScripts.ListenerTest {
 
         map.put("name", "traveler");
         map.put("job", "Leader");
-        given()
+        Response response= (Response) given()
                 .contentType("application/json")
                 .body(map)
                 .when()
-                .post("https://reqres.in/api/users")
-                .then()
-                .statusCode(201).log().all();
+                .post("https://reqres.in/api/users");
+        String statusline = response.getStatusLine();
+        Assert.assertEquals("HTTP/1.1 201 Created",statusline);
+        test.get().info("PostUsingMap"+map+response.prettyPrint());
     }
 
     /* this test will post email,password
@@ -66,6 +68,7 @@ public class PostMethod extends testScripts.ListenerTest {
                 .extract()
                 .path("token");
         Assert.assertEquals(token,"QpwL5tke4Pnpja7X4");
+        test.get().info("Assertion done for token"+token);
     }
 
     /* this test will post useremail without password and since
@@ -75,7 +78,7 @@ public class PostMethod extends testScripts.ListenerTest {
     public void PostViaJsonFile()
     {
         File jsonData = new File("src/main/resources/user.json");
-        given()
+         given()
                 .contentType(ContentType.JSON)
                 .body(jsonData)
                 .when()
@@ -83,6 +86,7 @@ public class PostMethod extends testScripts.ListenerTest {
                 .then()
                 .statusCode(400)
                 .body("error",equalTo("Missing password"));
+        test.get().info("Validated error message as:Missing password");
     }
 
     /*
@@ -97,11 +101,12 @@ public class PostMethod extends testScripts.ListenerTest {
         bkdt.setBody("HarryPotter in India");
         bkdt.setId(1);
 
-        given()
+        Response response= (Response) given()
                 .contentType("application/json").body(bkdt)
-                .when().post("https://jsonplaceholder.typicode.com/posts")
-                .then().statusCode(201).log().all();
-
+                .when().post("https://jsonplaceholder.typicode.com/posts");
+        int statuscode= response.getStatusCode();
+        Assert.assertEquals(201,statuscode);
+        test.get().info("PostViaJsonFile"+response.prettyPrint());
     }
 
     @DataProvider(name="testdata")
@@ -123,10 +128,12 @@ public class PostMethod extends testScripts.ListenerTest {
         object.put("username",username);
         object.put("email",email);
 
-        given().contentType("application/json")
+        Response response= (Response) given().contentType("application/json")
                 .body(object)
-                .when().post("https://jsonplaceholder.typicode.com/users")
-                .then().statusCode(201).log().all();
+                .when().post("https://jsonplaceholder.typicode.com/users");
+        int statuscode= response.getStatusCode();
+        Assert.assertEquals(201,statuscode);
+        test.get().info("PostviaDataTable"+response.prettyPrint());
     }
 
     @Test
@@ -134,9 +141,11 @@ public class PostMethod extends testScripts.ListenerTest {
     {
         DummyUser Dummyuser = DummyUser.builder().firstName("Maddock").lastName("Kenith").age("32").gender("Male")
                 .username("KenMad").password("Mad@Ken12").build();
-        given().contentType("application/json")
+        Response response= (Response) given().contentType("application/json")
                 .body(Dummyuser)
-                .when().post("https://dummyjson.com/users/add")
-                .then().statusCode(200).log().all();
+                .when().post("https://dummyjson.com/users/add");
+        int statuscode= response.getStatusCode();
+        Assert.assertEquals(200,statuscode);
+        test.get().info("Post using Builder"+response.prettyPrint());
     }
 }

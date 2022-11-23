@@ -1,6 +1,8 @@
 package testScripts;
 
+import io.restassured.response.Response;
 import org.json.simple.JSONObject;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -21,14 +23,14 @@ public class PutPatchDelete extends testScripts.ListenerTest{
     {
         JSONObject request = new JSONObject();
         request.put(" title","IronMan vs Captain America");
-        given()
+        Response response= (Response) given()
                 .contentType("application/json")
                 .body(request.toJSONString())
                 .when()
-                .patch("https://jsonplaceholder.typicode.com/posts/1")
-                .then()
-                .statusCode(200)
-                .log().all();
+                .patch("https://jsonplaceholder.typicode.com/posts/1");
+        int statuscode= response.getStatusCode();
+        Assert.assertEquals(200,statuscode);
+        test.get().info("Patch User with details:"+request);
     }
 
     @Test
@@ -40,6 +42,7 @@ public class PutPatchDelete extends testScripts.ListenerTest{
         given().contentType("application/json").body(request)
                 .when().put("https://reqres.in/api/users/2")
                 .then().log().all();
+        test.get().info("Updated User with details:"+request);
     }
 
 
@@ -49,5 +52,6 @@ public class PutPatchDelete extends testScripts.ListenerTest{
         given()
                 .when().delete("https://reqres.in/api/users/2")
                 .then().statusCode(204);
+        test.get().info("Deleted Users");
     }
 }

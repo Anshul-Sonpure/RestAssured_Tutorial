@@ -41,6 +41,7 @@ public class E2EFlow extends testScripts.ListenerTest {
         request.put("name","Demouser"+id);
         request.put("email","Demouser"+id+"@gmail.com");
         request.put("password","Demo_user@"+id);
+
         Response response =
                 given()
                         .contentType("application/json")
@@ -48,13 +49,12 @@ public class E2EFlow extends testScripts.ListenerTest {
                         .when()
                         .post("http://restapi.adequateshop.com/api/authaccount/registration");
         JsonPath path = response.jsonPath();
-        userId = path.get("data.Id");
-        Token = path.get("data.Token");
+        String Token = path.get("data.Token");
+        System.out.println(Token);
         FileWriter fWriter = new FileWriter("src/main/resources/token.txt");
         fWriter.write(Token);
-        System.out.println("UserId is : "+ userId + "&"+"Token is: "+ Token);
         fWriter.close();
-
+        test.get().info("Token"+Token+"written in token.txt");
     }
 
 
@@ -64,12 +64,12 @@ public class E2EFlow extends testScripts.ListenerTest {
         JSONObject request = new JSONObject();
         request.put("email","Demouser"+id+"@gmail.com");
         request.put("password","Demo_user@"+id);
-                String logintoken = given()
-                        .contentType("application/json")
-                        .body(request)
-                        .when()
-                        .post("http://restapi.adequateshop.com/api/authaccount/login")
-                        .then().extract().path("data.Token");
+        String logintoken = given()
+                .contentType("application/json")
+                .body(request)
+                .when()
+                .post("http://restapi.adequateshop.com/api/authaccount/login")
+                .then().extract().path("data.Token");
 
         System.out.println(logintoken);
 

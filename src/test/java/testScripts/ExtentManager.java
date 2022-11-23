@@ -23,7 +23,7 @@ public class ExtentManager {
     //Create an extent report instance
     public static ExtentReports createInstance() {
         
-    	spark = new ExtentSparkReporter("test-output/Reports/extentreport_" + timeStamp + ".html");
+    	spark = new ExtentSparkReporter("test-output/ExtentReport/extentreport_" + timeStamp + ".html");
 
         extent = new ExtentReports();
         extent.attachReporter(spark);

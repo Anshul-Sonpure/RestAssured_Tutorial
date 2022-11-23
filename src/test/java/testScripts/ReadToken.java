@@ -17,6 +17,7 @@ public class ReadToken extends testScripts.ListenerTest {
         Path path = Paths.get("src/main/resources/response.json");
         Token = Files.readAllLines(path).toString();
         System.out.println(Token);
+        test.get().info("Token fetched is:"+Token);
     }
 
 }

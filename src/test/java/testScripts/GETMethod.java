@@ -1,5 +1,6 @@
 package testScripts;
 
+import io.restassured.response.Response;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
@@ -28,23 +29,18 @@ public class GETMethod extends testScripts.ListenerTest {
     public void PrintResponse()
     {
 
-        given().get("https://reqres.in/api/users/2").then().log().all();
-
+        Response response = (Response) given().get("https://reqres.in/api/users/2")
+                .andReturn();
+            test.get().info(response.prettyPrint());
     }
     /*
     Getting Response Data
      */
     @Test
     void responseData() throws IOException {
-        InputStream stream = get("https://reqres.in/api/users/2").asInputStream(); // Don't forget to close this one when you're done
-        byte[] byteArray = get("https://reqres.in/api/users/2").asByteArray();
         String json = get("https://reqres.in/api/users/2").asString();
-        stream.toString();
-        stream.close();
-
-        System.out.println("InputStream stream ---> " +stream );
-        System.out.println("byte[] byteArray ---> " +byteArray );
         System.out.println("String json ---> " +json );
+        test.get().info("String json ---> " +json);
 
     }
 

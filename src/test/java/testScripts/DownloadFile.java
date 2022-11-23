@@ -74,7 +74,7 @@ public class DownloadFile extends testScripts.ListenerTest {
         byte[] bytes = response.asByteArray();
         File file = new File("src/main/resources/response.json");
         Files.write(file.toPath(),bytes);
-
+        test.get().info("Response written in response.json");
 
     }
 
@@ -88,6 +88,7 @@ public class DownloadFile extends testScripts.ListenerTest {
         System.out.println("File uploaded with status code::"+resp.getStatusLine());
         System.out.println(resp.getStatusLine());
         test.get().log(test.get().getStatus(),resp.getStatusLine());
+        test.get().info("File uploaded Successfully");
 
 
     }

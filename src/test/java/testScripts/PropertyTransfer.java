@@ -26,6 +26,7 @@ public class PropertyTransfer extends testScripts.ListenerTest {
                 .then().statusCode(201).extract().path("id");
 
         System.out.println(id);
+        test.get().info("User created with id:"+id);
     }
 
     @Test(dependsOnMethods = {"CreateUser"})
@@ -38,7 +39,7 @@ public class PropertyTransfer extends testScripts.ListenerTest {
         given().contentType("application/json").body(object)
                 .when().put("https://reqres.in/api/users/"+id)
                 .then().statusCode(200).log().all();
-
+        test.get().info("User updated with id:"+id);
 
     }
 
@@ -47,6 +48,7 @@ public class PropertyTransfer extends testScripts.ListenerTest {
     {
         given().when().delete("https://reqres.in/api/users/"+id)
                 .then().log().all();
+        test.get().info("User updated with id:"+id);
     }
 
 }
