@@ -4,6 +4,7 @@ import io.restassured.common.mapper.TypeRef;
 import org.RestAssured_Tutorials.UserDetails;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +41,7 @@ public class Deserialization extends testScripts.ListenerTest {
     @Test
     public void DeserializationwithGenerics()
     {
+
 
         List<Map<String, Object>> users = given().
                 get("https://jsonplaceholder.typicode.com/comments?postId=1").as(new TypeRef<List<Map<String, Object>>>() {});

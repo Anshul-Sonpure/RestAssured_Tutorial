@@ -21,6 +21,7 @@ public class ListenerTest implements ITestListener {
     @Override
     public void onTestSuccess(ITestResult result) {
         test.get().log(Status.PASS,"Test Case: "+result.getMethod().getMethodName()+ " is passed.");
+
     }
 
     @Override
