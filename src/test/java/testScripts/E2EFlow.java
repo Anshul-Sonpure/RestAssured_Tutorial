@@ -16,7 +16,7 @@ public class E2EFlow extends testScripts.ListenerTest {
 
     public static int userId;
     public static String Token;
-    int id = (int)(Math.random()*(100-05+1)+05);
+   static int id = (int)(Math.random()*(100-05+1)+05);
 
     /*
       In below we will see how we to perform End to End flow for api testing.
@@ -38,9 +38,9 @@ public class E2EFlow extends testScripts.ListenerTest {
 
 
         JSONObject request = new JSONObject();
-        request.put("name","Demouser"+id);
-        request.put("email","Demouser"+id+"@gmail.com");
-        request.put("password","Demo_user@"+id);
+        request.put("name","Testuser"+id);
+        request.put("email","Testuser"+id+"@yahoo.com");
+        request.put("password","Test_user@"+id);
 
         Response response =
                 given()
@@ -49,29 +49,30 @@ public class E2EFlow extends testScripts.ListenerTest {
                         .when()
                         .post("http://restapi.adequateshop.com/api/authaccount/registration");
         JsonPath path = response.jsonPath();
-        String Token = path.get("data.Token");
-        System.out.println(Token);
+        Token = path.get("data.Token");
+        System.out.println("Registration Token is: "+Token);
         FileWriter fWriter = new FileWriter("src/main/resources/token.txt");
         fWriter.write(Token);
         fWriter.close();
-        test.get().info("Token"+Token+"written in token.txt");
+//        test.get().info("Token"+Token+"written in token.txt");
     }
 
 
-    @Test(dependsOnMethods = {"RegisterUser"})
+    @Test
     public void UserLogin()
     {
         JSONObject request = new JSONObject();
         request.put("email","Demouser"+id+"@gmail.com");
         request.put("password","Demo_user@"+id);
-        String logintoken = given()
+        Response response = given()
                 .contentType("application/json")
                 .body(request)
                 .when()
-                .post("http://restapi.adequateshop.com/api/authaccount/login")
-                .then().extract().path("data.Token");
-
-        System.out.println(logintoken);
+                .post("http://restapi.adequateshop.com/api/authaccount/login");
+        JsonPath path = response.jsonPath();
+        Token = path.get("data.Token");
+        userId=path.get("data.Id");
+        System.out.println("Login Token is: " +Token);
 
     }
 
@@ -79,7 +80,7 @@ public class E2EFlow extends testScripts.ListenerTest {
       In below test we will set Token as Authorization header &
       then we will validate for userid 11133,11134,11135,11136
      */
-    @Test(dependsOnMethods = {"UserLogin"})
+    @Test
     public void Get_AllUsers() throws IOException
     {
         JSONObject request = new JSONObject();
@@ -103,12 +104,13 @@ public class E2EFlow extends testScripts.ListenerTest {
 
     }
 
-    @Test(dependsOnMethods = {"UserLogin"})
+    @Test
     public void CreateUser()
     {
         JSONObject request = new JSONObject();
         request.put("email","Demouser"+id+"@gmail.com");
         request.put("password","Demo_user@"+id);
+        request.put("location","USA");
         Token = given().contentType("application/json")
                 .body(request)
                 .when().post("http://restapi.adequateshop.com/api/authaccount/login")
@@ -127,7 +129,7 @@ public class E2EFlow extends testScripts.ListenerTest {
 
     }
 
-    @Test(dependsOnMethods = {"UserLogin"})
+    @Test
     public void GetuserbyId()
     {
         JSONObject request = new JSONObject();
@@ -140,7 +142,7 @@ public class E2EFlow extends testScripts.ListenerTest {
         System.out.println(Token);
         given().header("Authorization","Bearer "+Token)
                 .header("Content-Type","application/json")
-                .when().get("http://restapi.adequateshop.com/api/users/167655")
+                .when().get("http://restapi.adequateshop.com/api/users/"+userId)
                 .then()
                 .statusCode(200)
                 .body("email",equalTo("IronMan02@stark.io"))
@@ -158,17 +160,19 @@ public class E2EFlow extends testScripts.ListenerTest {
     public void UpdateUser()
     {
         JSONObject request = new JSONObject();
-        request.put("name","test");
-        request.put("salary","123332");
-        request.put("age","25");
-        given().get("https://dummy.restapiexample.com/api/v1/employee/20")
-                .then().log().all();
-        given().contentType("application/json")
+        request.put("id",userId);
+        request.put("name","Thomas Jerry");
+        request.put("email","JerryTom@mail.com");
+        request.put("location","New York");
+        Response response= given().contentType("application/json")
                 .body(request)
                 .when()
-                .put("https://dummy.restapiexample.com/api/v1/update/20")
-                .then().log().all();
-
+                .put("http://restapi.adequateshop.com/api/users"+userId);
+        JsonPath path = response.jsonPath();
+        String updatename = path.get("name");
+        String updateemail=path.get("email");
+        String updatedate = path.get("createdat");
+        System.out.println("Update name is: "+updatename+"Update email is: "+updatedate);
 
     }
 
@@ -176,7 +180,7 @@ public class E2EFlow extends testScripts.ListenerTest {
     public void DeleteUser()
     {
         given()
-                .when().delete("https://dummy.restapiexample.com/api/v1/delete/"+id)
+                .when().delete("http://restapi.adequateshop.com/api/users"+id)
                 .then().statusCode(200)
                 .body("message",equalTo("Successfully! Record has been deleted")).log().all();
     }

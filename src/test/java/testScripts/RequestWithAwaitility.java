@@ -128,28 +128,29 @@ we are making a get call and after 5 seconds we make another get call using path
    to mimick the status code received back we have used forloop
     and some variable
  */
-    @Test
-    public void AwaitwithResponseCode() {
-        int code = 50;
-        int statuscode;
-        for (int i = 1; i <= 5; i++) {
-            statuscode = i * code;
-            System.out.println("random StatusCode" + statuscode);
+@Test
+public void AwaitwithResponseCode() {
+    int code = 50;
+    int statuscode;
+    for (int i = 1; i <= 5; i++) {
+        statuscode = i * code;
+        System.out.println("random StatusCode" + statuscode);
+
+        if (statuscode == 200) {
+            int finalStatuscode = statuscode;
             Response response =
                     given()
                             .get("https://reqres.in/api/users/2")
                             .andReturn();
-            if (statuscode == 200) {
-                int finalStatuscode = statuscode;
-                System.out.println("Making the get call");
-                Awaitility.await().atMost(Duration.TEN_SECONDS).pollInterval(Duration.TWO_SECONDS)
-                        .until(() -> response.statusCode() == finalStatuscode);
-                System.out.println("ResponseCode" + response.statusCode());
-                break;
-            }
-            test.get().info("Response:"+response.prettyPrint());
+            System.out.println("Making the get call");
+            Awaitility.await().atMost(Duration.TEN_SECONDS).pollInterval(Duration.TWO_SECONDS)
+                    .until(() -> response.statusCode() == finalStatuscode);
+            System.out.println("ResponseCode" + response.statusCode());
+            System.out.println("ResponseCode" + response.prettyPrint());
+            break;
         }
     }
+}
     /*
     Another implementation for making a timeout request.
      */

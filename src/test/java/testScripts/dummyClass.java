@@ -1,5 +1,8 @@
 package testScripts;
 
+import io.restassured.response.Response;
+import org.awaitility.Awaitility;
+import org.awaitility.Duration;
 import org.testng.annotations.Test;
 
 import static io.restassured.RestAssured.given;
@@ -25,5 +28,30 @@ public class dummyClass extends testScripts.ListenerTest {
             System.out.println(i+"Seconds");
         }
             given().get("https://reqres.in/api/users/2").then().log().all();
+    }
+
+
+    @Test
+    public void AwaitwithResponseCode() {
+        int code = 50;
+        int statuscode;
+        for (int i = 1; i <= 5; i++) {
+            statuscode = i * code;
+            System.out.println("random StatusCode" + statuscode);
+
+            if (statuscode == 200) {
+                int finalStatuscode = statuscode;
+                Response response =
+                        given()
+                                .get("https://reqres.in/api/users/2")
+                                .andReturn();
+                System.out.println("Making the get call");
+                Awaitility.await().atMost(Duration.TEN_SECONDS).pollInterval(Duration.TWO_SECONDS)
+                        .until(() -> response.statusCode() == finalStatuscode);
+                System.out.println("ResponseCode" + response.statusCode());
+                System.out.println("ResponseCode" + response.prettyPrint());
+                break;
+            }
+        }
     }
 }
