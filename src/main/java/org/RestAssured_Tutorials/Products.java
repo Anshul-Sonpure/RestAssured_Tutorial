@@ -5,11 +5,12 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 public class Products {
 
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private String title;
+    private String title;   //This will be passed as json payload as we defined it to be not empty
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
-    private double price;
+    private double price; //This will be passed as json payload as we defined it to be not empty
     @JsonInclude(JsonInclude.Include.USE_DEFAULTS)
-    private String description;
+    private String description; /*This will be passed as json payload and even if we don't provide
+                                any value default value will be used */
     private byte image;
     @JsonInclude(JsonInclude.Include.NON_EMPTY)
     private String category;
