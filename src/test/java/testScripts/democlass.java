@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 import java.io.IOException;
 import java.util.List;
 
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 
 public class democlass extends testScripts.ListenerTest {
 

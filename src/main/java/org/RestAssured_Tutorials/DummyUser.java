@@ -7,7 +7,7 @@ import lombok.ToString;
 
 @Getter
 @ToString
-@Builder
+@Builder(toBuilder = true)
 public class DummyUser {
 
     private String firstName;
