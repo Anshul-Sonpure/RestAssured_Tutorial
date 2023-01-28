@@ -174,4 +174,14 @@ public class Validations extends testScripts.ListenerTest {
             }
 
         }
+    @Test
+    public void JsonwithFilters2()
+    {
+        Response products = RestAssured.given().get("https://fakestoreapi.com/products");
+        JsonPath path = products.jsonPath();
+        List<String> actualprd = path.getList("findAll{it.rating.rate>4}.price");
+        System.out.println(actualprd.toString());
+
+
+    }
 }
