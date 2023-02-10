@@ -4,7 +4,6 @@ import io.restassured.common.mapper.TypeRef;
 import org.RestAssured_Tutorials.UserDetails;
 import org.testng.annotations.Test;
 
-import java.lang.reflect.Type;
 import java.util.List;
 import java.util.Map;
 

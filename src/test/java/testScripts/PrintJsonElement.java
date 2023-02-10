@@ -62,4 +62,12 @@ public class PrintJsonElement extends ListenerTest {
         test.get().info("Fetching data from reponse"+id);
     }
 
+    @Test
+    public void ExtractElementUsingFind2()
+    {
+        List products = given().when().get("https://fakestoreapi.com/products").andReturn()
+                .jsonPath().getList("findAll{it.price>100}.title");
+        System.out.println("Products"+products);
+    }
+
 }

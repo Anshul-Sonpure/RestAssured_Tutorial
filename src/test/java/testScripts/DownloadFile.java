@@ -76,6 +76,7 @@ public class DownloadFile extends testScripts.ListenerTest {
         Files.write(file.toPath(),bytes);
         test.get().info("Response written in response.json");
 
+
     }
 
     @Test

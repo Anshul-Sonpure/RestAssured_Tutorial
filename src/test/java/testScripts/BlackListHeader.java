@@ -1,13 +1,6 @@
 package testScripts;
 
-/*
-    In below test we will blacklist some response headers from being logged in console.
- */
 
-import com.aventstack.extentreports.Status;
-import com.aventstack.extentreports.markuputils.CodeLanguage;
-import com.aventstack.extentreports.markuputils.Markup;
-import com.aventstack.extentreports.markuputils.MarkupHelper;
 import io.restassured.RestAssured;
 import io.restassured.config.LogConfig;
 import io.restassured.response.Response;
@@ -19,6 +12,10 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 
 public class BlackListHeader extends testScripts.ListenerTest {
+
+    /*
+    In below test we will blacklist some response headers from being logged in console.
+    */
     @Test
     public void BlacklistHeaders() {
 
@@ -32,7 +29,6 @@ public class BlackListHeader extends testScripts.ListenerTest {
 
             test.get().info(response.getBody().prettyPrint());
             test.get().info(response.getStatusLine());
-
 
     }
 }
