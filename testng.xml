@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="All Test Suite">
+    <listeners>
+        <listener class-name="testScripts.ListenerTest"/>
+    </listeners>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/BlackListHeader.java">
+        <classes>
+            <class name="testScripts.BlackListHeader">
+                <methods>
+                    <include name="BlacklistHeaders" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/Deserialization.java">
+        <classes>
+            <class name="testScripts.Deserialization">
+                <methods>
+                    <include name="deSerialization" />
+                    <include name="DeserializationwithGenerics" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/DownloadFile.java">
+        <classes>
+            <class name="testScripts.DownloadFile">
+                <methods>
+                    <include name="DownloadtextFile" />
+                    <include name="DownloadZipFile" />
+                    <include name="DownloadImgFile" />
+                    <include name="SaveJsonResponsetoFile" />
+                    <include name="UploadFile" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/dummyClass.java">
+        <classes>
+            <class name="testScripts.dummyClass">
+                <methods>
+                    <include name="PassTest" />
+                    <include name="FailTest" />
+                    <include name="PrintResponse" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/E2EFlow.java">
+        <classes>
+            <class name="testScripts.E2EFlow">
+                <methods>
+                    <include name="RegisterUser" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/ExtentManager.java">
+        <classes />
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/GETMethod.java">
+        <classes>
+            <class name="testScripts.GETMethod">
+                <methods>
+                    <include name="ValidateStatusCode" />
+                    <include name="PrintResponse" />
+                    <include name="responseData" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/ListenerTest.java">
+        <classes />
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/ParamsAndLoggers.java">
+        <classes>
+            <class name="testScripts.ParamsAndLoggers">
+                <methods>
+                    <include name="setParamHeaders" />
+                    <include name="setParams" />
+                    <include name="logAll" />
+                    <include name="logBody" />
+                    <include name="logHeader" />
+                    <include name="logCookie" />
+                    <include name="LogifValidationFails" />
+                    <include name="logifValidationFails" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/PostMethod.java">
+        <classes>
+            <class name="testScripts.PostMethod">
+                <methods>
+                    <include name="PostUsingMap" />
+                    <include name="PostUsingJsonObject" />
+                    <include name="PostViaJsonFile" />
+                    <include name="PostviaPOJO" />
+                    <include name="PostviaDataTable" />
+                    <include name="DummyUserBuilder" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/PrintJsonElement.java">
+        <classes>
+            <class name="testScripts.PrintJsonElement">
+                <methods>
+                    <include name="idUsingMap" />
+                    <include name="JsonwithFilters" />
+                    <include name="ExtractElementUsingFind" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/PropertyTransfer.java">
+        <classes>
+            <class name="testScripts.PropertyTransfer">
+                <methods>
+                    <include name="CreateUser" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/PutPatchDelete.java">
+        <classes>
+            <class name="testScripts.PutPatchDelete">
+                <methods>
+                    <include name="PatchRequest" />
+                    <include name="PutRequest" />
+                    <include name="DeleteRequest" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/ReadToken.java">
+        <classes>
+            <class name="testScripts.ReadToken">
+                <methods>
+                    <include name="readToken" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/RequestWithAwaitility.java">
+        <classes>
+            <class name="testScripts.RequestWithAwaitility">
+                <methods>
+                    <include name="PostUsingJsonObject" />
+                    <include name="PostUsingJsonObject2" />
+                    <include name="getViaAwaility" />
+                    <include name="AwaitwithResponseCode" />
+                    <include name="PrintResponse" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/UploadFile.java">
+        <classes>
+            <class name="testScripts.UploadFile">
+                <methods>
+                    <include name="UploadData" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+    <test verbose="2" preserve-order="true" name="D:/project/RestAssured_Tutorials/src/test/java/testScripts/Validations.java">
+        <classes>
+            <class name="testScripts.Validations">
+                <methods>
+                    <include name="ValidateMultipleContent" />
+                    <include name="ValidateMultipleData" />
+                    <include name="ValidateSingleContent" />
+                    <include name="ValidateJsonPath" />
+                    <include name="ValidateJsonResponse" />
+                    <include name="ValidateXMLPath" />
+                    <include name="ValidateXmlPath" />
+                    <include name="ValidateViaPattern" />
+                    <include name="JsonwithFilters" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
